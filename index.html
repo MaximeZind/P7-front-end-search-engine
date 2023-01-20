@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5b9da4c6e6.js" crossorigin="anonymous"></script>
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
 <body>
-    <header>
+    <header class="header">
         <img src="assets/images/lespetitsplats_logo.png" alt="Logo les petits plats">
     </header>
     <main>
         <div class="recipe__searchform__wrapper">
             <form method="post"  id="recipe__searchform">
                 <input type="text" name="search" placeholder="Rechercher une recette">
-                <button type="submit" form="recipe__searchform" value="SEND">
+                <button type="submit" form="recipe__searchform">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
@@ -22,31 +24,28 @@
         <section class="filters__section">
             <div class="filters"></div>
             <div class="dropdown__menus">
-                <div class="ingredients__menu">
+                <div class="ingredients__menu dropdown">
                     <header>
-                        <h2>Ingredients</h2>
                         <form method="post" id="ingredient__searchform">
-                            <input type="text" name="search" placeholder="Rechercher un ingrédient">
+                            <input type="text" name="search" placeholder="Ingrédients">
                         </form>
                         <i class="fa-sharp fa-solid fa-angle-down"></i>
                     </header>
                     <div class="ingredients__menu__list"></div>
                 </div>
-                <div class="appareils__menu">
+                <div class="appareils__menu dropdown">
                     <header>
-                        <h2>Appareils</h2>
                         <form method="post" id="appareils__searchform">
-                            <input type="text" name="search" placeholder="Rechercher un appareil">
+                            <input type="text" name="search" placeholder="Appareils">
                         </form>
                         <i class="fa-sharp fa-solid fa-angle-down"></i>
                     </header>
                     <div class="appareils__menu__list"></div>
                 </div>
-                <div class="ustensils__menu">
+                <div class="ustensils__menu dropdown">
                     <header>
-                        <h2>Ustensils</h2>
                         <form method="post" id="ustensils__searchform">
-                            <input type="text" name="search" placeholder="Rechercher un ustensil">
+                            <input type="text" name="search" placeholder="Ustensils">
                         </form>
                         <i class="fa-sharp fa-solid fa-angle-down"></i>
                     </header>
@@ -57,6 +56,7 @@
         <section class="recipes__gallery"></section>
     </main>
     <script src="factory/index.js"></script>
-    <script src="script/index.js"></script>
+    <script src="script/index.js" type="module"></script>
+    <script src="data/recipes.js" type="module"></script>
 </body>
 </html>

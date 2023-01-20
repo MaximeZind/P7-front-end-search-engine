@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.header img {
+    width: 248px;
+}
+
+/* MAIN */
+
+main {
+    margin-top: 15px;
+}
+
+/* Recipe Search Form */
+
+.recipe__searchform__wrapper {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#recipe__searchform input {
+    background-color: #E7E7E7;
+    border: none;
+    height: 35px;
+    padding-left: 7px;
+}
+
+#recipe__searchform input::placeholder {
+    color: #000;
+    opacity: 0.25;
+}
+
+input:focus {
+    outline: none;
+}
+
+#recipe__searchform button {
+    background-color: #E7E7E7;
+    border: none;
+    height: 35px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+}
+
+/* FILTERS */
+
+/* DROPDOWN MENUS */
+
+.dropdown__menus {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.dropdown {
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    overflow: hidden;
+    color: #FFF;
+}
+
+.dropdown header {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    height: 100%;
+    position: relative;
+}
+
+.dropdown header form {
+    display: block;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    height: 100%;
+    width: 100%;
+}
+
+.dropdown header form input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    color: #FFF;
+    font-size: 11px;
+}
+
+.dropdown header form input::placeholder {
+    color: #FFF;
+    font-size: 11px;
+}
+
+.dropdown header i {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.ingredients__menu {
+    background-color: #3282F7;
+}
+
+.ingredients__menu form input {
+    background-color: #3282F7;
+}
+
+.appareils__menu, .appareils__menu form input  {
+    background-color: #68D9A4;
+}
+
+
+.ustensils__menu, .ustensils__menu form input {
+    background-color: #ED6454;
+}
+
+/* GALLERY */

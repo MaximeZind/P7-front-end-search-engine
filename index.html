@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img src="assets/images/lespetitsplats_logo.png" alt="Logo les petits plats">
+    </header>
+    <main>
+        <div class="recipe__searchform__wrapper">
+            <form method="post"  id="recipe__searchform">
+                <input type="text" name="search" placeholder="Rechercher une recette">
+                <button type="submit" form="recipe__searchform" value="SEND">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        <section class="filters__section">
+            <div class="filters"></div>
+            <div class="dropdown__menus">
+                <div class="ingredients__menu">
+                    <header>
+                        <h2>Ingredients</h2>
+                        <form method="post" id="ingredient__searchform">
+                            <input type="text" name="search" placeholder="Rechercher un ingrédient">
+                        </form>
+                        <i class="fa-sharp fa-solid fa-angle-down"></i>
+                    </header>
+                    <div class="ingredients__menu__list"></div>
+                </div>
+                <div class="appareils__menu">
+                    <header>
+                        <h2>Appareils</h2>
+                        <form method="post" id="appareils__searchform">
+                            <input type="text" name="search" placeholder="Rechercher un appareil">
+                        </form>
+                        <i class="fa-sharp fa-solid fa-angle-down"></i>
+                    </header>
+                    <div class="appareils__menu__list"></div>
+                </div>
+                <div class="ustensils__menu">
+                    <header>
+                        <h2>Ustensils</h2>
+                        <form method="post" id="ustensils__searchform">
+                            <input type="text" name="search" placeholder="Rechercher un ustensil">
+                        </form>
+                        <i class="fa-sharp fa-solid fa-angle-down"></i>
+                    </header>
+                    <div class="ustensils__menu__list"></div>
+                </div>
+            </div>
+        </section>
+        <section class="recipes__gallery"></section>
+    </main>
+    <script src="factory/index.js"></script>
+    <script src="script/index.js"></script>
+</body>
+</html>

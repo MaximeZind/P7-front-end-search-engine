@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="html">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>Les petits plats</title>
 </head>
+
 <body>
     <header class="header">
         <img src="assets/images/lespetitsplats_logo.png" alt="Logo les petits plats">
     </header>
     <main>
         <div class="recipe__searchform__wrapper">
-            <form method="post"  id="recipe__searchform">
+            <form method="post" id="recipe__searchform">
                 <input type="text" name="search" placeholder="Rechercher une recette">
                 <button type="submit" form="recipe__searchform">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -25,32 +27,38 @@
         <section class="filters__section">
             <div class="filters"></div>
             <div class="filters__menus">
-                <div class="ingredients__menu dropdown">
-                    <header>
-                        <form method="post" id="ingredient__searchform">
-                            <input type="text" name="search" placeholder="Ingrédients">
-                        </form>
-                        <i class="fa-sharp fa-solid fa-angle-down"></i>
-                    </header>
-                    <div class="ingredients__menu__list dropdown__list"></div>
+                <div class="menu__wrapper">
+                    <div class="ingredients__menu dropdown">
+                        <header>
+                            <form method="post" id="ingredient__searchform">
+                                <input type="text" name="search" placeholder="Ingrédients">
+                            </form>
+                            <i class="fa-sharp fa-solid fa-angle-down"></i>
+                        </header>
+                        <div class="ingredients__menu__list dropdown__list"></div>
+                    </div>
                 </div>
-                <div class="appareils__menu dropdown">
-                    <header>
-                        <form method="post" id="appareils__searchform">
-                            <input type="text" name="search" placeholder="Appareils">
-                        </form>
-                        <i class="fa-sharp fa-solid fa-angle-down"></i>
-                    </header>
-                    <div class="appareils__menu__list dropdown__list"></div>
+                <div class="menu__wrapper">
+                    <div class="appareils__menu dropdown">
+                        <header>
+                            <form method="post" id="appareils__searchform">
+                                <input type="text" name="search" placeholder="Appareils">
+                            </form>
+                            <i class="fa-sharp fa-solid fa-angle-down"></i>
+                        </header>
+                        <div class="appareils__menu__list dropdown__list"></div>
+                    </div>
                 </div>
-                <div class="ustensils__menu dropdown">
-                    <header>
-                        <form method="post" id="ustensils__searchform">
-                            <input type="text" name="search" placeholder="Ustensils">
-                        </form>
-                        <i class="fa-sharp fa-solid fa-angle-down"></i>
-                    </header>
-                    <div class="ustensils__menu__list  dropdown__list"></div>
+                <div class="menu__wrapper">
+                    <div class="ustensils__menu dropdown">
+                        <header>
+                            <form method="post" id="ustensils__searchform">
+                                <input type="text" name="search" placeholder="Ustensiles">
+                            </form>
+                            <i class="fa-sharp fa-solid fa-angle-down"></i>
+                        </header>
+                        <div class="ustensils__menu__list  dropdown__list"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -61,4 +69,5 @@
     <script src="factory/index.js"></script>
     <script src="script/index.js" type="module"></script>
 </body>
+
 </html>

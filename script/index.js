@@ -44,18 +44,20 @@ function displayData(recipes){
     ingredientsList.append(ingredientsDrowndownDOM);
     appareilsList.append(appliancesDrowndownDOM);
     ustensilsList.append(ustensilsDropdownDOM);
-
-    // console.log(allIngredients);
-    // console.log(allAppliances);
-    // console.log(allUstensils);
 }
 
 function getEventListeners(){
-    const dropdownMenus = document.querySelectorAll('.dropdown');
 
-    // dropdownMenus.forEach((dropdownMenu) => {
-        document.addEventListener('click', dropdownInteraction);
-    // });
+    //Dom Elements
+    const ingredientsInput = document.querySelector("#ingredient__searchform > input[type=text]");
+    const appareilsInput = document.querySelector("#appareils__searchform > input[type=text]");
+    const ustensilsInput = document.querySelector("#ustensils__searchform > input[type=text]");
+    const body = document.querySelector("body");
+
+    body.addEventListener('click', dropdownInteraction); //Ouverture ou fermeture des dropdown menus
+    ingredientsInput.addEventListener('keyup', ingredientFilter); //Filtre des ingrédients à chaque pression d'une touche dans l'input
+    appareilsInput.addEventListener('keyup', ingredientFilter);
+    ustensilsInput.addEventListener('keyup', ingredientFilter);
 }
 
 function init(){

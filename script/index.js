@@ -37,9 +37,13 @@ function displayData(recipes){
     });
 
     const dropdownsModel = dropdownMenusFactory(allIngredients, allAppliances, allUstensils);
-    const IngredientsDrowndownDOM = dropdownsModel.getIngredientsDrowndownDOM();
+    const ingredientsDrowndownDOM = dropdownsModel.getIngredientsDrowndownDOM();
+    const appliancesDrowndownDOM = dropdownsModel.getAppliancesDrowndownDOM();
+    const ustensilsDropdownDOM = dropdownsModel.getUstensilsDropdownDOM();
 
-    ingredientsList.append(IngredientsDrowndownDOM);
+    ingredientsList.append(ingredientsDrowndownDOM);
+    appareilsList.append(appliancesDrowndownDOM);
+    ustensilsList.append(ustensilsDropdownDOM);
 
     // console.log(allIngredients);
     // console.log(allAppliances);

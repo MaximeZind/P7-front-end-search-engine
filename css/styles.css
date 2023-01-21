@@ -100,8 +100,8 @@ form {
 
 .dropdown:hover {
     width: 46.32vw;
-    height: 27.57vw;
     max-width: 46.32vw;
+    height: fit-content;
     max-height: 27.57vw;
 }
 

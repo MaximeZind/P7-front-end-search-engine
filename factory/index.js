@@ -109,5 +109,32 @@ function dropdownMenusFactory(ingredients, appliances, ustensils) {
         return ul
     }
 
-    return {getIngredientsDrowndownDOM}
+    function getAppliancesDrowndownDOM(){
+
+        const ul = document.createElement('ul');
+
+        appliances.forEach((item) => {
+            let itemFirstCaseHigher = item.charAt(0).toUpperCase() + item.slice(1);
+            const li = document.createElement('li');
+            li.textContent = `${itemFirstCaseHigher}`;
+            ul.append(li);
+        });
+
+        return ul
+    }
+
+    function getUstensilsDropdownDOM(){
+        const ul = document.createElement('ul');
+
+        ustensils.forEach((item) => {
+            let itemFirstCaseHigher = item.charAt(0).toUpperCase() + item.slice(1);
+            const li = document.createElement('li');
+            li.textContent = `${itemFirstCaseHigher}`;
+            ul.append(li);
+        });
+
+        return ul
+    }
+
+    return {getIngredientsDrowndownDOM, getAppliancesDrowndownDOM, getUstensilsDropdownDOM}
 }

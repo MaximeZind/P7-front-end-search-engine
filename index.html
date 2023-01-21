@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5b9da4c6e6.js" crossorigin="anonymous"></script>
     <link href="css/styles.css" rel="stylesheet" type="text/css">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <title>Les petits plats</title>
 </head>
 <body>
     <header class="header">
@@ -31,7 +32,7 @@
                         </form>
                         <i class="fa-sharp fa-solid fa-angle-down"></i>
                     </header>
-                    <div class="ingredients__menu__list"></div>
+                    <div class="ingredients__menu__list dropdown__list"></div>
                 </div>
                 <div class="appareils__menu dropdown">
                     <header>
@@ -40,7 +41,7 @@
                         </form>
                         <i class="fa-sharp fa-solid fa-angle-down"></i>
                     </header>
-                    <div class="appareils__menu__list"></div>
+                    <div class="appareils__menu__list dropdown__list"></div>
                 </div>
                 <div class="ustensils__menu dropdown">
                     <header>
@@ -49,14 +50,14 @@
                         </form>
                         <i class="fa-sharp fa-solid fa-angle-down"></i>
                     </header>
-                    <div class="ustensils__menu__list"></div>
+                    <div class="ustensils__menu__list  dropdown__list"></div>
                 </div>
             </div>
         </section>
         <section class="recipes__gallery"></section>
     </main>
+    <script src="data/recipes.js" type="module"></script>
     <script src="factory/index.js"></script>
     <script src="script/index.js" type="module"></script>
-    <script src="data/recipes.js" type="module"></script>
 </body>
 </html>

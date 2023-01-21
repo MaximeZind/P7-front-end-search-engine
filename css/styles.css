@@ -6,12 +6,18 @@
 }
 
 body {
+    font-family: "Lato";
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 7vw;
+    padding-right: 7vw;
 }
+
+ul {
+    list-style-type: none;
+}
+
 /* HEADER */
 .header {
     display: flex;
@@ -19,13 +25,13 @@ body {
 }
 
 .header img {
-    width: 248px;
+    width: 26.39vw;
 }
 
 /* MAIN */
 
 main {
-    margin-top: 15px;
+    margin-top: 1.74vw;
 }
 
 /* Recipe Search Form */
@@ -38,13 +44,15 @@ main {
 #recipe__searchform input {
     background-color: #E7E7E7;
     border: none;
-    height: 35px;
-    padding-left: 7px;
+    height: 4.8vw;
+    padding-left: 0.6vw;
+    font-size: 1.25vw;
 }
 
 #recipe__searchform input::placeholder {
     color: #000;
     opacity: 0.25;
+    font-size: 1.25vw
 }
 
 input:focus {
@@ -54,12 +62,17 @@ input:focus {
 #recipe__searchform button {
     background-color: #E7E7E7;
     border: none;
-    height: 35px;
+    height: 4.8vw;
+    padding: 0.7vw;
+}
+
+#recipe__searchform button i{
+    font-size: 2vw;
 }
 
 form {
     display: grid;
-    grid-template-columns: 1fr 40px;
+    grid-template-columns: 1fr 4vw;
 }
 
 /* FILTERS */
@@ -71,21 +84,31 @@ form {
     margin-bottom: 30px;
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 1.39vw;
 }
 
 .dropdown {
-    width: 100px;
-    height: 35px;
+    width: 11.81vw;
+    height: 4.8vw;
+    max-width: 11.81vw;
+    max-height: 4.8vw;
     border-radius: 5px;
     overflow: hidden;
     color: #FFF;
+    transition: all .4s;
+}
+
+.dropdown:hover {
+    width: 46.32vw;
+    height: 27.57vw;
+    max-width: 46.32vw;
+    max-height: 27.57vw;
 }
 
 .dropdown header {
     display: grid;
     grid-template-columns: 75% 25%;
-    height: 100%;
+    height: 4.8vw;
     position: relative;
 }
 
@@ -105,18 +128,18 @@ form {
     border: none;
     padding: 10px;
     color: #FFF;
-    font-size: 11px;
+    font-size: 1.25vw;
 }
 
 .dropdown header form input::placeholder {
     color: #FFF;
-    font-size: 11px;
+    font-size: 1.25vw;
 }
 
 .dropdown header i {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 1.25vw;
+    top: calc(2.4vw - 8px);
 }
 
 .ingredients__menu {
@@ -136,4 +159,97 @@ form {
     background-color: #ED6454;
 }
 
+.dropdown__list {
+    padding: 0.2vw 1.39vw 1.39vw 1.39vw;
+}
+
+.dropdown__list ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 1.25vw;
+    gap: 0.7vw;
+}
+
+.dropdown__list ul li {
+    width: fit-content;
+}
+
+.dropdown__list ul li:hover {
+    width: fit-content;
+    cursor: pointer
+}
+
 /* GALLERY */
+
+.recipes__gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3.47vw;
+}
+
+.recipes__gallery article {
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 12.36vw 12.5vw;
+    background-color: #E7E7E7;
+}
+
+.recipes__gallery article img {
+    width: 100%;
+    height: 100%;
+}
+
+.recipes__gallery article .card__content {
+    padding: 1.04vw 1.39vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipes__gallery article .card__content header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card__content header h2{
+    font-size: 1.39vw;
+}
+
+.card__header-time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.49vw;
+}
+
+.card__header-time strong, .card__header-time i {
+    font-size: 1.39vw;
+}
+
+.card__textcontent {
+    height: 7.57vw;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top: 0.9vw;
+}
+.card__textcontent__ingredientslist, .card__textcontent__instructions {
+    height: 6vw;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    font-size: 0.83vw;
+    line-height: 1vw;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+

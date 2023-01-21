@@ -50,13 +50,17 @@ function displayData(recipes){
     // console.log(allUstensils);
 }
 
-function vw(x){
-    return ((x*100)/1440)
+function getEventListeners(){
+    const dropdownMenus = document.querySelectorAll('.dropdown');
+
+    // dropdownMenus.forEach((dropdownMenu) => {
+        document.addEventListener('click', dropdownInteraction);
+    // });
 }
 
 function init(){
-displayData(recipes);
-console.log(vw(667))
+    displayData(recipes);
+    getEventListeners();
 }
 
 init();

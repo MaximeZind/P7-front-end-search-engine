@@ -79,7 +79,7 @@ form {
 
 /* DROPDOWN MENUS */
 
-.dropdown__menus {
+.filters__menus {
     margin-top: 15px;
     margin-bottom: 30px;
     display: flex;
@@ -98,7 +98,7 @@ form {
     transition: all .4s;
 }
 
-.dropdown:hover {
+.dropdown__activated {
     width: 46.32vw;
     max-width: 46.32vw;
     height: fit-content;
@@ -161,6 +161,8 @@ form {
 
 .dropdown__list {
     padding: 0.2vw 1.39vw 1.39vw 1.39vw;
+    max-height: 22.5vw;
+    overflow: hidden;
 }
 
 .dropdown__list ul {

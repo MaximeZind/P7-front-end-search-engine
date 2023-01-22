@@ -22,26 +22,33 @@ function openDropdown(event) {
     }
 }
 
+function opening(element){
+    element.classList.add('dropdown__activating');
+    element.parentNode.classList.add('wrapper__stretched');
+}
+
+function closing(element){
+    element.classList.remove('dropdown__activating');
+    element.parentNode.classList.remove('wrapper__stretched');  
+}
+
 //Fonction pour factoriser le processus de ne garder qu'un menu ouvert
 //Assigne des classes en fonction du résultat recherché
 function selectOneMenu(first, second, third) {
-    first.classList.add('dropdown__activated');
-    first.parentNode.classList.add('wrapper__stretched');
-    second.classList.remove('dropdown__activated');
-    second.parentNode.classList.remove('wrapper__stretched');
-    third.classList.remove('dropdown__activated');
-    third.parentNode.classList.remove('wrapper__stretched');
+    opening(first);
+    closing(second);
+    closing(third);
 }
 
 //Fonction qui, quand appelée, ferme tous les dropdown menus
 function closeAllDropdownMenus(ingredientsDropdown, appareilsDropdown, ustensilsDropdown) {
-    ingredientsDropdown.classList.remove('dropdown__activated');
+    ingredientsDropdown.classList.remove('dropdown__activating');
     ingredientsDropdown.parentNode.classList.remove('wrapper__stretched');
     document.querySelector("#ingredient__searchform > input[type=text]").setAttribute('placeholder', 'Ingrédients');
-    appareilsDropdown.classList.remove('dropdown__activated');
+    appareilsDropdown.classList.remove('dropdown__activating');
     appareilsDropdown.parentNode.classList.remove('wrapper__stretched');
     document.querySelector("#appareils__searchform > input[type=text]").setAttribute('placeholder', 'Appareils');
-    ustensilsDropdown.classList.remove('dropdown__activated');
+    ustensilsDropdown.classList.remove('dropdown__activating');
     ustensilsDropdown.parentNode.classList.remove('wrapper__stretched');
     document.querySelector("#ustensils__searchform > input[type=text]").setAttribute('placeholder','Ustensiles');
 }

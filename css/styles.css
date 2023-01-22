@@ -98,10 +98,6 @@ form {
     transition: all .3s;
 }
 
-.wrapper__stretched {
-    width: 46.32vw;
-}
-
 .dropdown {
     position: absolute;
     width: 11.81vw;
@@ -115,16 +111,9 @@ form {
     z-index: 3;
 }
 
-.dropdown__activated {
-    width: 46.32vw;
-    max-width: 46.32vw;
-    height: fit-content;
-    max-height: 27.57vw;
-}
-
 .dropdown header {
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 1fr 3.5vw;
     height: 4.8vw;
     position: relative;
 }
@@ -152,10 +141,6 @@ form {
     font-size: 1.25vw;
 }
 
-.dropdown__activated header form input::placeholder {
-    opacity: 0.5;
-}
-
 .dropdown header form input::placeholder {
     color: #FFF;
     font-size: 1.25vw;
@@ -163,13 +148,10 @@ form {
 
 .dropdown header i {
     position: absolute;
+    display: block;
     right: 1.25vw;
     top: calc(2.4vw - 8px);
     transition: transform .3s;
-}
-
-.dropdown__activated header i {
-    transform: rotate(180deg);
 }
 
 .ingredients__menu {
@@ -191,7 +173,7 @@ form {
 
 .dropdown__list {
     padding: 0.2vw 1.39vw 1.39vw 1.39vw;
-    max-height: 22.5vw;
+    max-height: 21.9vw;
     overflow: hidden;
 }
 
@@ -209,6 +191,62 @@ form {
 .dropdown__list ul li:hover {
     width: fit-content;
     cursor: pointer
+}
+
+/* Dropdown Activating */
+
+.dropdown__activating {
+    animation: .5s ease-out dropdown__activating_x 0s,
+     .5s ease-out .5s dropdown__activating_y;
+    animation-fill-mode: forwards;
+    padding-bottom: 1.39vw;
+}
+
+@keyframes dropdown__activating_x {
+
+0% {
+    max-width: 11.81vw;
+}
+
+100% {
+    width: 46.32vw;
+    max-width: 46.32vw;
+}
+
+}
+
+@keyframes dropdown__activating_y {
+
+    0% {
+        height: 4.8vw;
+    }
+    
+    100% {
+        max-height: 27.57vw;
+        height: fit-content;
+    }
+    
+    }
+
+/* Dropdown Activated */
+
+.wrapper__stretched {
+    width: 46.32vw;
+}
+
+.dropdown__activated {
+    width: 46.32vw;
+    max-width: 46.32vw;
+    height: fit-content;
+    max-height: 27.57vw;
+}
+
+.dropdown__activated header form input::placeholder {
+    opacity: 0.5;
+}
+
+.dropdown__activated header i {
+    transform: rotate(180deg);
 }
 
 /* GALLERY */

@@ -1,4 +1,4 @@
-import {recipes} from '/data/recipes.js';
+import {recipes} from '../data/recipes.js';
 
 function displayData(recipes){
     const ingredientsList = document.querySelector(".ingredients__menu__list");

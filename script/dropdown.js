@@ -61,7 +61,12 @@ function dropdownInteraction(event) {
 
     if (event.target.closest('div') || (event.target.localName === ('i' || 'span')) ){
         if ((event.target.localName === 'i') || (event.target.localName === 'span')){
-            event.preventDefault();
+            if(event.target.closest('div')){
+                if(event.target.closest('div').className.includes('dropdown')){
+                openDropdown(event);}
+            } else if (event.target.closest('div') === null){
+                event.preventDefault();
+            }
         } else if (event.target.closest('div').className.includes('dropdown')) {
             openDropdown(event);
         } else if ((!event.target.closest('div').className.includes('dropdown'))) {
@@ -142,17 +147,4 @@ function closeTag(event){
             event.target.parentNode.remove();
         }
 
-}
-
-
-//fonction qui, quand appelée, va renvoyer une array des tags sélectionnés et actifs
-function getFiltersArray(){
-    const filtersSection = document.querySelector('.filters');
-    let tagElements = Array.from(filtersSection.children);
-    let tagList = [];
-    tagElements.forEach((element) => {
-        tagList.push(element.innerText);
-    });
-
-    return tagList
 }

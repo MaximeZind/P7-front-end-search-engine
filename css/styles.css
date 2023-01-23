@@ -14,10 +14,6 @@ body {
     padding-right: 7vw;
 }
 
-.hidden {
-    display: none;
-}
-
 ul {
     list-style-type: none;
 }
@@ -349,5 +345,9 @@ form {
     display: -webkit-box !important;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+}
+
+.hidden {
+    display: none !important;
 }
 

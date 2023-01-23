@@ -1,32 +1,47 @@
 function recipeSearchFormInputInteraction(event) {
-    let articles = document.querySelectorAll('.card__textcontent');
+    const articles = document.querySelectorAll('.card__textcontent');
     let keyWords = getFiltersArray();
     let formInput = getRecipeSearchFormArray();
 
     keyWords.forEach((keyword) => {
         formInput.push(keyword);
     });
-
     if (event.target.value.length > 2){
+
         articles.forEach((article) => {
+            let articleMatch = 0;
+            let wordMatch  = 0;
             formInput.forEach((word) => {
-                if (getArticlesArray(article).title.includes(word)
-                 || getArticlesArray(article).ingredients.includes(word)
-                 || getArticlesArray(article).instructions.includes(word) ){
-                    article.parentNode.parentNode.classList.remove('hidden');
-                 } else if (!getArticlesArray(article).title.includes(word)
-                 && !getArticlesArray(article).ingredients.includes(word)
-                 && !getArticlesArray(article).instructions.includes(word) ){
-                    article.parentNode.parentNode.classList.add('hidden');
-                 }
+                wordMatch = articleValidation(article, word);
+                console.log(wordMatch);
+                articleMatch = articleMatch + wordMatch;
+                console.log(articleMatch);
             });
+            console.log(articleMatch);
+            if (articleMatch === formInput.length){
+                article.parentNode.parentNode.classList.remove('hidden');
+            } else if (articleMatch !== formInput.length){
+                article.parentNode.parentNode.classList.add('hidden');
+            }
         });
     } else if (event.target.value.length <=2){
         articles.forEach((article) => {
             article.parentNode.parentNode.classList.remove('hidden');
         })
     }
+}
 
+
+function articleValidation(article, word){
+    if (getArticlesArray(article).title.includes(word)
+    || getArticlesArray(article).ingredients.includes(word)
+    || getArticlesArray(article).instructions.includes(word)){
+        return 1
+    } else if (!getArticlesArray(article).title.includes(word)
+    && !getArticlesArray(article).ingredients.includes(word)
+    && !getArticlesArray(article).instructions.includes(word)){
+       return 0
+    }
 }
 
 
@@ -36,7 +51,7 @@ function getFiltersArray(){
     let tagElements = Array.from(filtersSection.children);
     let tagList = [];
     tagElements.forEach((element) => {
-        tagList.push(element.innerText);
+        tagList.push(element.innerText.toLowerCase());
     });
 
     return tagList
@@ -44,8 +59,9 @@ function getFiltersArray(){
 
 function getRecipeSearchFormArray(){
     const recipeSearchFormInput = document.querySelector('#recipe__searchform > input[type=text]');
-    let recipeSearchFormValue = recipeSearchFormInput.value.trim();
+    let recipeSearchFormValue = recipeSearchFormInput.value.trim().toLowerCase();
     let searchValueArray = recipeSearchFormValue.split(' ');
+    
 
     return searchValueArray
 }

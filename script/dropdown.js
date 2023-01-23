@@ -115,7 +115,6 @@ function selectTag(event){
         }
         filtersSection.append(span);
         span.append(i);
-        console.log(getFiltersArray());
     }
 }
 

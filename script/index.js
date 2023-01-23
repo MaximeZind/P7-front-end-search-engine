@@ -55,15 +55,18 @@ function getEventListeners(){
     const body = document.querySelector("body");
     const dropdownList = document.querySelectorAll(".dropdown__list");
     const filtersSection = document.querySelector('.filters');
+    const recipeSearchFormInput = document.querySelector('#recipe__searchform > input[type=text]');
 
+    // EventListeners
     body.addEventListener('click', dropdownInteraction); //Ouverture ou fermeture des dropdown menus
     ingredientsInput.addEventListener('keyup', tagFilter); //Filtre des ingrédients à chaque pression d'une touche dans l'input
     appareilsInput.addEventListener('keyup', tagFilter);
     ustensilsInput.addEventListener('keyup', tagFilter);
-    dropdownList.forEach((list) => {
+    dropdownList.forEach((list) => {    //Gestion des tags des dropdown
         list.addEventListener('click', selectTag);
     });
     filtersSection.addEventListener('click', closeTag);
+    recipeSearchFormInput.addEventListener('keyup', recipeSearchFormInputInteraction)
     
 }
 

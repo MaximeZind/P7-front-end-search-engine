@@ -59,8 +59,10 @@ function dropdownInteraction(event) {
     const appareilsDropdown = document.querySelector('.appareils__menu');
     const ustensilsDropdown = document.querySelector('.ustensils__menu');
 
-    if (event.target.closest('div')) {
-        if (event.target.closest('div').className.includes('dropdown')) {
+    if (event.target.closest('div') || (event.target.localName === ('i' || 'span')) ){
+        if ((event.target.localName === 'i') || (event.target.localName === 'span')){
+            event.preventDefault();
+        } else if (event.target.closest('div').className.includes('dropdown')) {
             openDropdown(event);
         } else if ((!event.target.closest('div').className.includes('dropdown'))) {
             closeAllDropdownMenus(ingredientsDropdown, appareilsDropdown, ustensilsDropdown);
@@ -112,6 +114,9 @@ function selectTag(event){
     }
 }
 
+
+//Fonction qui va supprimer le tag sur lequel on clique, et le recréer
+//dans la liste dans laquelle il correspond (ingrédients, appareils ou ustensils)
 function closeTag(event){
         if (event.target.className.includes('tag__close')){
             console.log(event.target.parentNode);

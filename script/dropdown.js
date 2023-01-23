@@ -72,17 +72,82 @@ function dropdownInteraction(event) {
 
 // Fonctions pour filtrer les Ingrédients / Appareils / Ustensiles
 
-function ingredientFilter(event){
+function tagFilter(event){
     let list = event.target.parentNode.parentNode.nextElementSibling.firstChild.children;
     const inputValue = event.target.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     list = Array.from(list);
     list.forEach((element) => {
         let term = element.textContent;
-        term = term.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        term = term.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); //enlève tous les accents
         if (!term.includes(inputValue)){
             element.classList.add('hidden');
         } if (term.includes(inputValue)){
             element.classList.remove('hidden');
         }
     });
+}
+
+//Fonction qui se déclenche lorsqu'on clique sur un élément de nos listes ingrédients, appareils ou ustensils
+//et crée un tag
+function selectTag(event){
+    const filtersSection = document.querySelector('.filters');
+    if (event.target.localName === 'li'){
+
+        event.target.classList.add('hidden');
+
+        const span = document.createElement('span');
+        const i = document.createElement('i');
+        i.setAttribute('class', 'fa-regular fa-circle-xmark tag__close');
+        span.textContent = event.target.innerText;
+        if (event.target.parentNode.parentNode.className.includes('ustensils')){
+            span.setAttribute('class', 'tag tag__ustensil');
+        } else if (event.target.parentNode.parentNode.className.includes('ingredients')){
+            span.setAttribute('class', 'tag tag__ingredient');
+        } else if (event.target.parentNode.parentNode.className.includes('appareils')){
+            span.setAttribute('class', 'tag tag__appareil');
+        }
+        filtersSection.append(span);
+        span.append(i);
+        console.log(getFiltersArray());
+    }
+}
+
+function closeTag(event){
+        if (event.target.className.includes('tag__close')){
+            console.log(event.target.parentNode);
+            if (event.target.parentNode.className.includes('ingredient')){
+                const ingredientsList = Array.from(document.querySelector('.ingredients__menu__list').firstChild.children);
+                const hiddenIngredients = ingredientsList
+                .filter(ingredient => ingredient.className.includes('hidden'))
+                .filter(ingredient => ingredient.innerText === event.target.parentNode.innerText);
+                hiddenIngredients[0].classList.remove('hidden');
+            } else if (event.target.parentNode.className.includes('appareil')){
+                const appareilsList = Array.from(document.querySelector('.appareils__menu__list').firstChild.children);
+                const hiddenAppareils = appareilsList
+                .filter(appareil => appareil.className.includes('hidden'))
+                .filter(appareil => appareil.innerText === event.target.parentNode.innerText);
+                hiddenAppareils[0].classList.remove('hidden');
+            } else if (event.target.parentNode.className.includes('ustensil')){
+                const ustensilsList = Array.from(document.querySelector('.ustensils__menu__list').firstChild.children);
+                const hiddenUstensils = ustensilsList
+                .filter(ustensil => ustensil.className.includes('hidden'))
+                .filter(ustensil => ustensil.innerText === event.target.parentNode.innerText);
+                hiddenUstensils[0].classList.remove('hidden');
+            }
+            event.target.parentNode.remove();
+        }
+
+}
+
+
+//fonction qui, quand appelée, va renvoyer une array des tags sélectionnés et actifs
+function getFiltersArray(){
+    const filtersSection = document.querySelector('.filters');
+    let tagElements = Array.from(filtersSection.children);
+    let tagList = [];
+    tagElements.forEach((element) => {
+        tagList.push(element.innerText);
+    });
+
+    return tagList
 }

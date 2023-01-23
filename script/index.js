@@ -53,11 +53,18 @@ function getEventListeners(){
     const appareilsInput = document.querySelector("#appareils__searchform > input[type=text]");
     const ustensilsInput = document.querySelector("#ustensils__searchform > input[type=text]");
     const body = document.querySelector("body");
+    const dropdownList = document.querySelectorAll(".dropdown__list");
+    const filtersSection = document.querySelector('.filters');
 
     body.addEventListener('click', dropdownInteraction); //Ouverture ou fermeture des dropdown menus
-    ingredientsInput.addEventListener('keyup', ingredientFilter); //Filtre des ingrédients à chaque pression d'une touche dans l'input
-    appareilsInput.addEventListener('keyup', ingredientFilter);
-    ustensilsInput.addEventListener('keyup', ingredientFilter);
+    ingredientsInput.addEventListener('keyup', tagFilter); //Filtre des ingrédients à chaque pression d'une touche dans l'input
+    appareilsInput.addEventListener('keyup', tagFilter);
+    ustensilsInput.addEventListener('keyup', tagFilter);
+    dropdownList.forEach((list) => {
+        list.addEventListener('click', selectTag);
+    });
+    filtersSection.addEventListener('click', closeTag);
+    
 }
 
 function init(){

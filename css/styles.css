@@ -260,6 +260,10 @@ form {
     transform: rotate(180deg);
 }
 
+.dropdown__activating header form input::placeholder {
+    opacity: 0.5;
+}
+
 /* Dropdown Activated */
 
 .wrapper__stretched {

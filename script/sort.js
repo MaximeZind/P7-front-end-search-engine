@@ -1,34 +1,54 @@
-function recipeSearchFormInputInteraction(event) {
+function recipeSearchFormInputInteraction() {
     const articles = document.querySelectorAll('.card__textcontent');
+    const searchInput = document.querySelector('#recipe__searchform > input[type=text]');
+
     let keyWords = getFiltersArray();
     let formInput = getRecipeSearchFormArray();
+    console.log(keyWords.length);
 
     keyWords.forEach((keyword) => {
         formInput.push(keyword);
     });
-    if (event.target.value.length > 2){
+
+    if ((searchInput.value.trim().length > 2) || (keyWords.length > 1)){ //Début du tri des articles
 
         articles.forEach((article) => {
             let articleMatch = 0;
             let wordMatch  = 0;
             formInput.forEach((word) => {
                 wordMatch = articleValidation(article, word);
-                console.log(wordMatch);
                 articleMatch = articleMatch + wordMatch;
-                console.log(articleMatch);
             });
-            console.log(articleMatch);
             if (articleMatch === formInput.length){
                 article.parentNode.parentNode.classList.remove('hidden');
             } else if (articleMatch !== formInput.length){
                 article.parentNode.parentNode.classList.add('hidden');
             }
         });
-    } else if (event.target.value.length <=2){
+    } else if ((searchInput.value.trim().length <=2) && (keyWords.length === 0)){
         articles.forEach((article) => {
             article.parentNode.parentNode.classList.remove('hidden');
-        })
+        });// Fin du tri des articles
     }
+//Début du tri des tags
+    const ingredientsTagElements = document.querySelectorAll('.ingredients__menu__list > ul > li');
+    const ingredientsTagList = [];
+    ingredientsTagElements.forEach((element) => {
+        if (!element.className.includes('hidden')){
+            ingredientsTagList.push(element.innerText);
+        }
+    });
+    articles.forEach((article) => {
+        if (!article.parentNode.parentNode.className.includes('hidden')){
+            ingredientsTagElements.forEach((element) => {
+                if(!getArticlesArray(article).ingredients.includes(element.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))){
+                    element.classList.add('hidden');
+                } else if (getArticlesArray(article).ingredients.includes(element.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))){
+                    element.classList.remove('hidden');
+                }
+            });
+        }
+    });
 }
 
 

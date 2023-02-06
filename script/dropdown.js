@@ -62,7 +62,6 @@ function dropdownInteraction(event) {
     if (event.target.closest('div') || (event.target.localName === ('i' || 'span'))) {
         if ((event.target.localName === 'i') || (event.target.localName === 'span')) {
             if (event.target.closest('div')) {
-                console.log(event.target.closest('div'));
                 if ((event.target.closest('div').className.includes('dropdown')) && (!event.target.closest('div').className.includes('dropdown__activating'))) {
                     openDropdown(event);
                 } else if (event.target.closest('div').className.includes('dropdown__activating')) {
@@ -120,7 +119,6 @@ function selectTag(event) {
         filtersSection.append(span);
         span.append(i);
     }
-
 }
 
 

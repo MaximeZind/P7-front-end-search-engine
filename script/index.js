@@ -1,4 +1,5 @@
 import {recipes} from '../data/recipes.js';
+import { search } from '../script/sort.js';
 
 function displayData(recipes){
     const ingredientsList = document.querySelector(".ingredients__menu__list");
@@ -66,7 +67,11 @@ function getEventListeners(){
         list.addEventListener('click', selectTag);
     });
     filtersSection.addEventListener('click', closeTag);
-    recipeSearchFormInput.addEventListener('keyup', recipeSearchFormInputInteraction)
+    recipeSearchFormInput.addEventListener('keyup', (event) => {
+        if (event.target.value.length > 2){
+            search();
+        }
+    });
     
 }
 

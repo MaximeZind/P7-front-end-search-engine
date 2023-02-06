@@ -1,108 +1,92 @@
-function recipeSearchFormInputInteraction() {
-    const articles = document.querySelectorAll('.card__textcontent');
-    const searchInput = document.querySelector('#recipe__searchform > input[type=text]');
+import { recipes } from '../data/recipes.js';
+import { getRecipeArray } from '../script/globals.js';
 
-    let keyWords = getFiltersArray();
-    let formInput = getRecipeSearchFormArray();
-    console.log(keyWords.length);
-
-    keyWords.forEach((keyword) => {
-        formInput.push(keyword);
+export function searchInit() {
+    //Création de l'array de tags
+    const filtersSection = document.querySelector('.filters');
+    let ingredientsTags = [];
+    let appliancesTags = [];
+    let ustensilsTags = [];
+    Array.from(filtersSection.children).forEach((tag) => {
+        if (tag.className.includes('ingredient')) {
+            ingredientsTags.push(tag.innerText);
+        } else if (tag.className.includes('appareil')) {
+            appliancesTags.push(tag.innerText);
+        } else if (tag.className.includes('ustensil')) {
+            ustensilsTags.push(tag.innerText);
+        }
     });
 
-    if ((searchInput.value.trim().length > 2) || (keyWords.length > 1)){ //Début du tri des articles
+    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().replace(/[^a-zA-Z\s]+/g, "").trim();
+    let inputValueArray = [];
+    if (inputValue.length > 2) {
+        inputValueArray = inputValue.split(/\s+/);
+    }
 
-        articles.forEach((article) => {
-            let articleMatch = 0;
-            let wordMatch  = 0;
-            formInput.forEach((word) => {
-                wordMatch = articleValidation(article, word);
-                articleMatch = articleMatch + wordMatch;
-            });
-            if (articleMatch === formInput.length){
-                article.parentNode.parentNode.classList.remove('hidden');
-            } else if (articleMatch !== formInput.length){
-                article.parentNode.parentNode.classList.add('hidden');
+    let keywords = {
+        'ingredientsTags': ingredientsTags,
+        'ustensilsTags': ustensilsTags,
+        'appliancesTags': appliancesTags,
+        'input': inputValueArray
+    }
+    return keywords
+}
+
+export function search() {
+
+    const filtersSection = document.querySelector('.filters');
+    let inputKeywords = searchInit();
+    let result = [];
+    recipes.forEach((recipe) => {
+        let match = true;
+        let count = 0;
+        //Si il y a des tags
+        if (filtersSection.children.length > 0) {
+            if (inputKeywords.ingredientsTags.length > 0) {
+                inputKeywords.ingredientsTags.forEach((item) => {
+                    recipe.ingredients.forEach((ingredient) => {
+                        if (ingredient.ingredient.includes(item)) {
+                            count += 1;
+                        }
+                    });
+                });
+            }
+            if (inputKeywords.ustensilsTags.length > 0) {
+                inputKeywords.ustensilsTags.forEach((item) => {
+                    recipe.ustensils.forEach((ustensil) => {
+                        if (ustensil.includes(item)) {
+                            count += 1;
+                        }
+                    });
+                });
+
+            }
+            if (inputKeywords.ingredientsTags.length > 0) {
+                inputKeywords.ingredientsTags.forEach((item) => {
+                    if (recipe.appliance.includes(item)) {
+                        count += 1;
+                    }
+                });
+            }
+            //Premier tri avec les tags: Si les tags ne correspondent pas à la recette
+            //renvoie return, et on passe à la recette suivante
+            if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))){
+                return
+            }
+        }
+
+        //Test de l'input utilisateur
+        let recipeKeywords = getRecipeArray(recipe).join(' ');
+        inputKeywords.input.forEach((keyword) => {
+            if (!recipeKeywords.includes(keyword)) {
+                match = false;
+                return
             }
         });
-    } else if ((searchInput.value.trim().length <=2) && (keyWords.length === 0)){
-        articles.forEach((article) => {
-            article.parentNode.parentNode.classList.remove('hidden');
-        });// Fin du tri des articles
-    }
-//Début du tri des tags
-    const ingredientsTagElements = document.querySelectorAll('.ingredients__menu__list > ul > li');
-    const ingredientsTagList = [];
-    ingredientsTagElements.forEach((element) => {
-        if (!element.className.includes('hidden')){
-            ingredientsTagList.push(element.innerText);
+        // Si elle match, on rajoute cette recette au résultat
+        if (match) {
+            result.push(recipe);
         }
     });
-    articles.forEach((article) => {
-        if (!article.parentNode.parentNode.className.includes('hidden')){
-            ingredientsTagElements.forEach((element) => {
-                if(!getArticlesArray(article).ingredients.includes(element.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))){
-                    element.classList.add('hidden');
-                } else if (getArticlesArray(article).ingredients.includes(element.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))){
-                    element.classList.remove('hidden');
-                }
-            });
-        }
-    });
-}
-
-
-function articleValidation(article, word){
-    if (getArticlesArray(article).title.includes(word)
-    || getArticlesArray(article).ingredients.includes(word)
-    || getArticlesArray(article).instructions.includes(word)){
-        return 1
-    } else if (!getArticlesArray(article).title.includes(word)
-    && !getArticlesArray(article).ingredients.includes(word)
-    && !getArticlesArray(article).instructions.includes(word)){
-       return 0
-    }
-}
-
-
-//fonction qui, quand appelée, va renvoyer une array des tags sélectionnés et actifs
-function getFiltersArray(){
-    const filtersSection = document.querySelector('.filters');
-    let tagElements = Array.from(filtersSection.children);
-    let tagList = [];
-    tagElements.forEach((element) => {
-        tagList.push(element.innerText.toLowerCase());
-    });
-
-    return tagList
-}
-
-function getRecipeSearchFormArray(){
-    const recipeSearchFormInput = document.querySelector('#recipe__searchform > input[type=text]');
-    let recipeSearchFormValue = recipeSearchFormInput.value.trim().toLowerCase();
-    let searchValueArray = recipeSearchFormValue.split(' ');
-    
-
-    return searchValueArray
-}
-
-
-// Renvoie un objet composé de 3 strings, ingredients instructions et title
-function getArticlesArray(article){
-
-    let ingredientsList = Array.from(article.firstChild.children);
-    let ingredients = [];
-    ingredientsList.forEach((ingredient) => {
-        let ingredientName = ingredient.firstChild.innerText.trim();
-        ingredientName = ingredientName.replace(':', '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        ingredients.push(ingredientName);
-    });
-    ingredients = ingredients.join(' ');
-
-        let articleData = {
-            'title': article.parentNode.firstChild.firstChild.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-            'ingredients' : ingredients,
-            'instructions' : article.firstChild.nextElementSibling.firstChild.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        }
-        return articleData
+    return result
 }

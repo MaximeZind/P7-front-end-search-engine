@@ -1,5 +1,6 @@
 import { recipes } from '../data/recipes.js';
 import { getRecipeArray } from '../script/globals.js';
+import { displayData } from '../script/index.js';
 
 export function searchInit() {
     //Création de l'array de tags
@@ -34,6 +35,7 @@ export function searchInit() {
 
 export function search() {
 
+    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().replace(/[^a-zA-Z\s]+/g, "").trim();
     const filtersSection = document.querySelector('.filters');
     let inputKeywords = searchInit();
     let result = [];
@@ -70,23 +72,33 @@ export function search() {
             }
             //Premier tri avec les tags: Si les tags ne correspondent pas à la recette
             //renvoie return, et on passe à la recette suivante
-            if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))){
+            if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
                 return
             }
         }
 
         //Test de l'input utilisateur
-        let recipeKeywords = getRecipeArray(recipe).join(' ');
-        inputKeywords.input.forEach((keyword) => {
-            if (!recipeKeywords.includes(keyword)) {
-                match = false;
-                return
-            }
-        });
+        if (inputValue.length > 2) {
+            let recipeKeywords = getRecipeArray(recipe).join(' ');
+            inputKeywords.input.forEach((keyword) => {
+                if (!recipeKeywords.includes(keyword)) {
+                    match = false;
+                    return
+                }
+            });
+        }
         // Si elle match, on rajoute cette recette au résultat
         if (match) {
             result.push(recipe);
         }
     });
-    return result
+    const recipesGallery = document.querySelector('.recipes__gallery');
+    const ingredientsTagList = document.querySelector('.ingredients__menu__list');
+    const appareilsTagList = document.querySelector('.appareils__menu__list');
+    const ustensilsTagList = document.querySelector('.ustensils__menu__list');
+    recipesGallery.innerHTML = '';
+    ingredientsTagList.innerHTML = '';
+    appareilsTagList.innerHTML = '';
+    ustensilsTagList.innerHTML = '';
+    displayData(result);
 }

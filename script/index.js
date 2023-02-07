@@ -1,7 +1,7 @@
 import {recipes} from '../data/recipes.js';
 import { search } from '../script/sort.js';
 
-function displayData(recipes){
+ export function displayData(recipes){
     const ingredientsList = document.querySelector(".ingredients__menu__list");
     const appareilsList = document.querySelector(".appareils__menu__list");
     const ustensilsList = document.querySelector(".ustensils__menu__list");
@@ -67,12 +67,7 @@ function getEventListeners(){
         list.addEventListener('click', selectTag);
     });
     filtersSection.addEventListener('click', closeTag);
-    recipeSearchFormInput.addEventListener('keyup', (event) => {
-        if (event.target.value.length > 2){
-            search();
-        }
-    });
-    
+    recipeSearchFormInput.addEventListener('keyup', search);
 }
 
 function init(){

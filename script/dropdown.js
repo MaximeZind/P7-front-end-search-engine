@@ -4,21 +4,25 @@ function openDropdown(event) {
     const appareilsDropdown = document.querySelector('.appareils__menu');
     const ustensilsDropdown = document.querySelector('.ustensils__menu');
 
+    const ingredientsInput = document.querySelector("#ingredient__searchform > input[type=text]");
+    const appareilsInput = document.querySelector("#appareils__searchform > input[type=text]");
+    const ustensilsInput = document.querySelector("#ustensils__searchform > input[type=text]");
+
     if (event.target.closest('div').className.includes('ingredients__menu')) {
         selectOneMenu(ingredientsDropdown, appareilsDropdown, ustensilsDropdown);
-        document.querySelector("#ingredient__searchform > input[type=text]").setAttribute('placeholder', 'Rechercher un ingrédient');
-        document.querySelector("#appareils__searchform > input[type=text]").setAttribute('placeholder', 'Appareils');
-        document.querySelector("#ustensils__searchform > input[type=text]").setAttribute('placeholder', 'Ustensiles');
+        ingredientsInput.setAttribute('placeholder', 'Rechercher un ingrédient');
+        appareilsInput.setAttribute('placeholder', 'Appareils');
+        ustensilsInput.setAttribute('placeholder', 'Ustensiles');
     } else if (event.target.closest('div').className.includes('appareils__menu')) {
         selectOneMenu(appareilsDropdown, ingredientsDropdown, ustensilsDropdown);
-        document.querySelector("#appareils__searchform > input[type=text]").setAttribute('placeholder', 'Rechercher un appareil');
-        document.querySelector("#ingredient__searchform > input[type=text]").setAttribute('placeholder', 'Ingrédients');
-        document.querySelector("#ustensils__searchform > input[type=text]").setAttribute('placeholder', 'Ustensiles');
+        appareilsInput.setAttribute('placeholder', 'Rechercher un appareil');
+        ingredientsInput.setAttribute('placeholder', 'Ingrédients');
+        ustensilsInput.setAttribute('placeholder', 'Ustensiles');
     } else if (event.target.closest('div').className.includes('ustensils__menu')) {
         selectOneMenu(ustensilsDropdown, ingredientsDropdown, appareilsDropdown);
-        document.querySelector("#ustensils__searchform > input[type=text]").setAttribute('placeholder', 'Rechercher un ustensile');
-        document.querySelector("#ingredient__searchform > input[type=text]").setAttribute('placeholder', 'Ingrédients');
-        document.querySelector("#appareils__searchform > input[type=text]").setAttribute('placeholder', 'Appareils');
+        ustensilsInput.setAttribute('placeholder', 'Rechercher un ustensile');
+        ingredientsInput.setAttribute('placeholder', 'Ingrédients');
+        appareilsInput.setAttribute('placeholder', 'Appareils');
     }
 }
 

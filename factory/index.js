@@ -96,6 +96,7 @@ function dropdownMenusFactory(ingredients, appliances, ustensils) {
 
     function getIngredientsDrowndownDOM(){
 
+        const tags = document.querySelectorAll('.tag');
         const ul = document.createElement('ul');
 
         ingredients.forEach((item) => {
@@ -103,6 +104,11 @@ function dropdownMenusFactory(ingredients, appliances, ustensils) {
             let itemFirstCaseHigher = item.charAt(0).toUpperCase() + item.slice(1);
             const li = document.createElement('li');
             li.textContent = `${itemFirstCaseHigher}`;
+            tags.forEach((tag) => {
+                if (tag.innerText === li.textContent){
+                    li.setAttribute('class','hidden');
+                }
+            });
             ul.append(li);
         });
 

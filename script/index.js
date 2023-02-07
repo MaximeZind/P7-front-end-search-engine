@@ -1,5 +1,10 @@
 import {recipes} from '../data/recipes.js';
 import { search } from '../script/sort.js';
+import { dropdownInteraction } from '../script/dropdown.js';
+import { tagFilter } from '../script/dropdown.js';
+import { selectTag } from '../script/dropdown.js';
+import { closeTag } from '../script/dropdown.js';
+
 
  export function displayData(recipes){
     const ingredientsList = document.querySelector(".ingredients__menu__list");
@@ -57,6 +62,7 @@ function getEventListeners(){
     const dropdownList = document.querySelectorAll(".dropdown__list");
     const filtersSection = document.querySelector('.filters');
     const recipeSearchFormInput = document.querySelector('#recipe__searchform > input[type=text]');
+    const unclickedTags = document.querySelectorAll(".dropdown__list > ul > li");
 
     // EventListeners
     body.addEventListener('click', dropdownInteraction); //Ouverture ou fermeture des dropdown menus

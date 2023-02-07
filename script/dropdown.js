@@ -1,3 +1,5 @@
+import { search } from '../script/sort.js';
+
 //Fonction qui gère l'ouverture des menus dropdown
 function openDropdown(event) {
     const ingredientsDropdown = document.querySelector('.ingredients__menu');
@@ -57,7 +59,7 @@ function closeAllDropdownMenus(ingredientsDropdown, appareilsDropdown, ustensils
     document.querySelector("#ustensils__searchform > input[type=text]").setAttribute('placeholder', 'Ustensiles');
 }
 
-function dropdownInteraction(event) {
+export function dropdownInteraction(event) {
 
     const ingredientsDropdown = document.querySelector('.ingredients__menu');
     const appareilsDropdown = document.querySelector('.appareils__menu');
@@ -86,7 +88,7 @@ function dropdownInteraction(event) {
 
 // Fonctions pour filtrer les Ingrédients / Appareils / Ustensiles
 
-function tagFilter(event) {
+export function tagFilter(event) {
     let list = event.target.parentNode.parentNode.nextElementSibling.firstChild.children;
     const inputValue = event.target.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     list = Array.from(list);
@@ -103,7 +105,7 @@ function tagFilter(event) {
 
 //Fonction qui se déclenche lorsqu'on clique sur un élément de nos listes ingrédients, appareils ou ustensils
 //et crée un tag
-function selectTag(event) {
+export function selectTag(event) {
     const filtersSection = document.querySelector('.filters');
     if (event.target.localName === 'li') {
 
@@ -123,12 +125,13 @@ function selectTag(event) {
         filtersSection.append(span);
         span.append(i);
     }
+    search();
 }
 
 
 //Fonction qui va supprimer le tag sur lequel on clique, et le recréer
 //dans la liste dans laquelle il correspond (ingrédients, appareils ou ustensils)
-function closeTag(event) {
+export function closeTag(event) {
     if (event.target.className.includes('tag__close')) {
         console.log(event.target.parentNode);
         if (event.target.parentNode.className.includes('ingredient')) {
@@ -152,5 +155,5 @@ function closeTag(event) {
         }
         event.target.parentNode.remove();
     }
-
+    search();
 }

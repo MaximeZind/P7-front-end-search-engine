@@ -41,31 +41,31 @@ export function getRecipeArray(recipe) {
 }
 
 
-export function getRecipesBinaryTree() {
-    const recipes = getArticlesArray();
+// export function getRecipesBinaryTree() {
+//     const recipes = getArticlesArray();
 
-    // Créer un arbre binaire avec les mots clés des recettes en tant que noeuds
+//     // Créer un arbre binaire avec les mots clés des recettes en tant que noeuds
 
-    let binaryTree = {}; // Initialisez l'arbre binaire
+//     let binaryTree = {}; // Initialisez l'arbre binaire
 
-    // Pour chaque recette, divisez les mots clés en un tableau de lettres
-    recipes.forEach((recipe) => {
-        recipe.keywords.forEach((keyword) => {
-            let currentNode = binaryTree;
-            for (let i = 0; i < keyword.length; i++) {
-                let letter = keyword[i];
-                if (!currentNode.children) {
-                    currentNode.children = {};
-                }
-                if (!currentNode.children[letter]) {
-                    currentNode.children[letter] = {};
-                }
-                currentNode = currentNode.children[letter];
-            }
-            currentNode.recipes = currentNode.recipes || [];
-            currentNode.recipes.push(recipe);
-        });
-    });
-    console.log(binaryTree);
-    return binaryTree;
-}
+//     // Pour chaque recette, divisez les mots clés en un tableau de lettres
+//     recipes.forEach((recipe) => {
+//         recipe.keywords.forEach((keyword) => {
+//             let currentNode = binaryTree;
+//             for (let i = 0; i < keyword.length; i++) {
+//                 let letter = keyword[i];
+//                 if (!currentNode.children) {
+//                     currentNode.children = {};
+//                 }
+//                 if (!currentNode.children[letter]) {
+//                     currentNode.children[letter] = {};
+//                 }
+//                 currentNode = currentNode.children[letter];
+//             }
+//             currentNode.recipes = currentNode.recipes || [];
+//             currentNode.recipes.push(recipe);
+//         });
+//     });
+//     console.log(binaryTree);
+//     return binaryTree;
+// }

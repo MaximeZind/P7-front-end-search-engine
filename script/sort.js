@@ -44,6 +44,7 @@ export function search() {
         let count = 0;
         //Si il y a des tags
         if (filtersSection.children.length > 0) {
+            //Tags ingrédients
             if (inputKeywords.ingredientsTags.length > 0) {
                 inputKeywords.ingredientsTags.forEach((item) => {
                     recipe.ingredients.forEach((ingredient) => {
@@ -53,6 +54,7 @@ export function search() {
                     });
                 });
             }
+            // Tags ustensiles
             if (inputKeywords.ustensilsTags.length > 0) {
                 inputKeywords.ustensilsTags.forEach((item) => {
                     recipe.ustensils.forEach((ustensil) => {
@@ -63,8 +65,9 @@ export function search() {
                 });
 
             }
-            if (inputKeywords.ingredientsTags.length > 0) {
-                inputKeywords.ingredientsTags.forEach((item) => {
+            // Tags appareils
+            if (inputKeywords.appliancesTags.length > 0) {
+                inputKeywords.appliancesTags.forEach((item) => {
                     if (recipe.appliance.includes(item)) {
                         count += 1;
                     }

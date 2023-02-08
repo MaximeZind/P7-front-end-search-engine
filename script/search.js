@@ -29,8 +29,8 @@ export function getInputKeywords() {
         'ustensilsTags': ustensilsTags,
         'appliancesTags': appliancesTags,
         'input': inputValueArray
-    }
-    return keywords
+    };
+    return keywords;
 }
 
 export function search() {
@@ -74,8 +74,8 @@ export function search() {
                 }
                 //Premier tri avec les tags: Si les tags ne correspondent pas à la recette
                 //renvoie return, et on passe à la recette suivante
-                if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
-                    continue
+                if ((count !== (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
+                    continue;
                 }
             }
     
@@ -85,7 +85,7 @@ export function search() {
                 for(let j=0; j<inputKeywords.input.length; j+=1) {
                     if (!recipeKeywords.includes(inputKeywords.input[j])) {
                         match = false;
-                        continue
+                        continue;
                     }
                 }
             }

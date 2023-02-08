@@ -6,11 +6,7 @@ import { closeTag } from '../dropdown.js';
 import { recipesFactory } from '../factory/recipesfactory.js';
 import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
 
-
-
-
-
- export function displayData(recipes){
+export function displayData(recipes) {
     const ingredientsList = document.querySelector(".ingredients__menu__list");
     const appareilsList = document.querySelector(".appareils__menu__list");
     const ustensilsList = document.querySelector(".ustensils__menu__list");
@@ -24,20 +20,23 @@ import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
 
         recipe.ingredients.forEach((item) => {
             let itemLowerCase = item.ingredient.toLowerCase();
-            if (!allIngredients.includes(itemLowerCase)){
+            if (!allIngredients.includes(itemLowerCase)) {
                 allIngredients.push(itemLowerCase);
             }
         });
+        allIngredients = allIngredients.sort((a, b) => a.localeCompare(b, 'fr'));
 
-            if (!allAppliances.includes(recipe.appliance)){
-                allAppliances.push(recipe.appliance);
+        if (!allAppliances.includes(recipe.appliance)) {
+            allAppliances.push(recipe.appliance);
+        }
+        allAppliances = allAppliances.sort((a, b) => a.localeCompare(b, 'fr'));
+
+        recipe.ustensils.forEach((item) => {
+            if (!allUstensils.includes(item)) {
+                allUstensils.push(item);
             }
-
-            recipe.ustensils.forEach((item) => {
-                if (!allUstensils.includes(item)){
-                    allUstensils.push(item);
-                }
-            });
+        });
+        allUstensils = allUstensils.sort((a, b) => a.localeCompare(b, 'fr'));
 
         const recipeModel = recipesFactory(recipe);
         const recipeCardsDOM = recipeModel.getRecipeCardsDOM();
@@ -56,7 +55,7 @@ import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
     ustensilsList.append(ustensilsDropdownDOM);
 }
 
-function getEventListeners(){
+function getEventListeners() {
 
     //Dom Elements
     const ingredientsInput = document.querySelector("#ingredient__searchform > input[type=text]");
@@ -66,7 +65,7 @@ function getEventListeners(){
     const dropdownList = document.querySelectorAll(".dropdown__list");
     const filtersSection = document.querySelector('.filters');
     const recipeSearchFormInput = document.querySelector('#recipe__searchform > input[type=text]');
-    const unclickedTags = document.querySelectorAll(".dropdown__list > ul > li");
+    const forms = document.querySelectorAll('form');
 
     // EventListeners
     body.addEventListener('click', dropdownInteraction); //Ouverture ou fermeture des dropdown menus
@@ -78,9 +77,14 @@ function getEventListeners(){
     });
     filtersSection.addEventListener('click', closeTag);
     recipeSearchFormInput.addEventListener('keyup', search);
+    forms.forEach((form) => {
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+    });
 }
 
-function init(){
+function init() {
     search();
     getEventListeners();
 }

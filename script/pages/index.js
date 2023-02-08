@@ -7,10 +7,21 @@ import { recipesFactory } from '../factory/recipesfactory.js';
 import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
 
 export function displayData(recipes) {
-    const ingredientsList = document.querySelector(".ingredients__menu__list");
-    const appareilsList = document.querySelector(".appareils__menu__list");
-    const ustensilsList = document.querySelector(".ustensils__menu__list");
-    const recipesGallery = document.querySelector(".recipes__gallery");
+    //Message d'erreur s'il n'y a pas de recettes
+    const errorMsg = document.querySelector('.no__results');
+    errorMsg.classList.add('hidden');
+    if (recipes.length === 0){
+        errorMsg.classList.remove('hidden');
+    }
+    //Initialisation du DOM (effacement de toutes les cartes et tags)
+    const recipesGallery = document.querySelector('.recipes__gallery');
+    const ingredientsList = document.querySelector('.ingredients__menu__list');
+    const appareilsList = document.querySelector('.appareils__menu__list');
+    const ustensilsList = document.querySelector('.ustensils__menu__list');
+    recipesGallery.innerHTML = '';
+    ingredientsList.innerHTML = '';
+    appareilsList.innerHTML = '';
+    ustensilsList.innerHTML = '';
 
     let allIngredients = [];
     let allAppliances = [];

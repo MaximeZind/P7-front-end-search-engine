@@ -34,8 +34,6 @@ export function getInputKeywords() {
 }
 
 export function search() {
-    const errorMsg = document.querySelector('.no__results');
-    errorMsg.classList.add('hidden');
     const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
     const filtersSection = document.querySelector('.filters');
     let inputKeywords = getInputKeywords();
@@ -96,17 +94,5 @@ export function search() {
                 result.push(recipes[i]);
             }
     }
-    
-    const recipesGallery = document.querySelector('.recipes__gallery');
-    const ingredientsTagList = document.querySelector('.ingredients__menu__list');
-    const appareilsTagList = document.querySelector('.appareils__menu__list');
-    const ustensilsTagList = document.querySelector('.ustensils__menu__list');
-    recipesGallery.innerHTML = '';
-    ingredientsTagList.innerHTML = '';
-    appareilsTagList.innerHTML = '';
-    ustensilsTagList.innerHTML = '';
     displayData(result);
-    if (result.length === 0){
-        errorMsg.classList.remove('hidden');
-    }
 }

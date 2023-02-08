@@ -1,3 +1,4 @@
+//Fonction qui renvoie une array de mots clés, à partir d'une recette
 export function getRecipeArray(recipe) {
     const stopWords = ['de', 'un', 'une', 'le', 'la', 'les', 'et', 'en', 'du', 'au', 'a', '0', '1', '2', '3', 'ou'];
     let ingredients = [];

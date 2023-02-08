@@ -2,7 +2,7 @@ import { recipes } from '/data/recipes.js';
 import { getRecipeArray } from './globals.js';
 import { displayData } from './pages/index.js';
 
-export function searchInit() {
+export function getInputKeywords() {
     //Création de l'array de tags
     const filtersSection = document.querySelector('.filters');
     let ingredientsTags = [];
@@ -38,7 +38,7 @@ export function search() {
     errorMsg.classList.add('hidden');
     const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
     const filtersSection = document.querySelector('.filters');
-    let inputKeywords = searchInit();
+    let inputKeywords = getInputKeywords();
     let result = [];
     // Pour chaque recette
     recipes.forEach((recipe) => {

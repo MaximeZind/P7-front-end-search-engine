@@ -1,4 +1,4 @@
-import { search } from '../script/sort.js';
+import { search } from './search.js';
 
 //Fonction qui gère l'ouverture des menus dropdown
 function openDropdown(event) {
@@ -133,7 +133,6 @@ export function selectTag(event) {
 //dans la liste dans laquelle il correspond (ingrédients, appareils ou ustensils)
 export function closeTag(event) {
     if (event.target.className.includes('tag__close')) {
-        console.log(event.target.parentNode);
         if (event.target.parentNode.className.includes('ingredient')) {
             const ingredientsList = Array.from(document.querySelector('.ingredients__menu__list').firstChild.children);
             const hiddenIngredients = ingredientsList

@@ -281,6 +281,17 @@ form {
     opacity: 0.5;
 }
 
+/* Message d'erreur (pas de recettes) */
+
+.no__results{
+    display: flex;
+    padding: 20px;
+}
+
+.no__results p{
+    margin: auto;
+    font-size: 25px;
+}
 
 
 /* GALLERY */

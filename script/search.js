@@ -1,6 +1,6 @@
 import { recipes } from '/data/recipes.js';
-import { getRecipeArray } from '../script/globals.js';
-import { displayData } from '../script/pages/index.js';
+import { getRecipeArray } from './globals.js';
+import { displayData } from './pages/index.js';
 
 export function searchInit() {
     //Création de l'array de tags
@@ -10,11 +10,11 @@ export function searchInit() {
     let ustensilsTags = [];
     Array.from(filtersSection.children).forEach((tag) => {
         if (tag.className.includes('ingredient')) {
-            ingredientsTags.push(tag.innerText);
+            ingredientsTags.push(tag.innerText.toLowerCase());
         } else if (tag.className.includes('appareil')) {
-            appliancesTags.push(tag.innerText);
+            appliancesTags.push(tag.innerText.toLowerCase());
         } else if (tag.className.includes('ustensil')) {
-            ustensilsTags.push(tag.innerText);
+            ustensilsTags.push(tag.innerText.toLowerCase());
         }
     });
 
@@ -34,7 +34,8 @@ export function searchInit() {
 }
 
 export function search() {
-
+    const errorMsg = document.querySelector('.no__results');
+    errorMsg.classList.add('hidden');
     const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
     const filtersSection = document.querySelector('.filters');
     let inputKeywords = searchInit();
@@ -49,7 +50,7 @@ export function search() {
             if (inputKeywords.ingredientsTags.length > 0) {
                 inputKeywords.ingredientsTags.forEach((item) => {
                     recipe.ingredients.forEach((ingredient) => {
-                        if (ingredient.ingredient.includes(item)) {
+                        if (ingredient.ingredient.toLowerCase().includes(item)) {
                             count += 1;
                         }
                     });
@@ -59,17 +60,16 @@ export function search() {
             if (inputKeywords.ustensilsTags.length > 0) {
                 inputKeywords.ustensilsTags.forEach((item) => {
                     recipe.ustensils.forEach((ustensil) => {
-                        if (ustensil.includes(item)) {
+                        if (ustensil.toLowerCase().includes(item)) {
                             count += 1;
                         }
                     });
                 });
-
             }
             // Tags appareils
             if (inputKeywords.appliancesTags.length > 0) {
                 inputKeywords.appliancesTags.forEach((item) => {
-                    if (recipe.appliance.includes(item)) {
+                    if (recipe.appliance.toLowerCase().includes(item)) {
                         count += 1;
                     }
                 });
@@ -105,4 +105,7 @@ export function search() {
     appareilsTagList.innerHTML = '';
     ustensilsTagList.innerHTML = '';
     displayData(result);
+    if (result.length === 0){
+        errorMsg.classList.remove('hidden');
+    }
 }

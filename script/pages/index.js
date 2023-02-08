@@ -1,4 +1,4 @@
-import { search } from '../sort.js';
+import { search } from '../search.js';
 import { dropdownInteraction } from '../dropdown.js';
 import { tagFilter } from '../dropdown.js';
 import { selectTag } from '../dropdown.js';

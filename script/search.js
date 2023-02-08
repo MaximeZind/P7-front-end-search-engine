@@ -41,61 +41,62 @@ export function search() {
     let inputKeywords = getInputKeywords();
     let result = [];
     // Pour chaque recette
-    recipes.forEach((recipe) => {
-        let match = true;
-        let count = 0;
-        //Si il y a des tags
-        if (filtersSection.children.length > 0) {
-            //Tags ingrédients
-            if (inputKeywords.ingredientsTags.length > 0) {
-                inputKeywords.ingredientsTags.forEach((item) => {
-                    recipe.ingredients.forEach((ingredient) => {
-                        if (ingredient.ingredient.toLowerCase().includes(item)) {
-                            count += 1;
+    for( let i=0; i < recipes.length; i+=1 ){
+            let match = true;
+            let count = 0;
+            //Si il y a des tags
+            if (filtersSection.children.length > 0) {
+                //Tags ingrédients
+                if (inputKeywords.ingredientsTags.length > 0) {
+                    for(let j=0; j<inputKeywords.ingredientsTags.length; j+=1){
+                        for(let k=0; k<recipes[i].ingredients.length; k+=1){
+                            if (recipes[i].ingredients[k].ingredient.toLowerCase().includes(inputKeywords.ingredientsTags[j])) {
+                                count += 1;
+                            }
                         }
-                    });
-                });
-            }
-            // Tags ustensiles
-            if (inputKeywords.ustensilsTags.length > 0) {
-                inputKeywords.ustensilsTags.forEach((item) => {
-                    recipe.ustensils.forEach((ustensil) => {
-                        if (ustensil.toLowerCase().includes(item)) {
-                            count += 1;
-                        }
-                    });
-                });
-            }
-            // Tags appareils
-            if (inputKeywords.appliancesTags.length > 0) {
-                inputKeywords.appliancesTags.forEach((item) => {
-                    if (recipe.appliance.toLowerCase().includes(item)) {
-                        count += 1;
                     }
-                });
-            }
-            //Premier tri avec les tags: Si les tags ne correspondent pas à la recette
-            //renvoie return, et on passe à la recette suivante
-            if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
-                return
-            }
-        }
-
-        //Test de l'input utilisateur
-        if (inputValue.length > 2) {
-            let recipeKeywords = getRecipeArray(recipe).join(' ');
-            inputKeywords.input.forEach((keyword) => {
-                if (!recipeKeywords.includes(keyword)) {
-                    match = false;
-                    return
                 }
-            });
-        }
-        // Si elle match, on rajoute cette recette au résultat
-        if (match) {
-            result.push(recipe);
-        }
-    });
+                // Tags ustensiles
+                if (inputKeywords.ustensilsTags.length > 0) {
+                    for(let j=0; j< inputKeywords.ustensilsTags.length; j+=1){
+                        for(let k=0; k<recipes[i].ustensils.length; k+=1) {
+                            if (recipes[i].ustensils[k].toLowerCase().includes(inputKeywords.ustensilsTags[j])) {
+                                count += 1;
+                            }
+                        }
+                    }
+                }
+                // Tags appareils
+                if (inputKeywords.appliancesTags.length > 0) {
+                    for(let j=0; j< inputKeywords.appliancesTags.length; j+=1){
+                        if (recipes[i].appliance.toLowerCase().includes(inputKeywords.appliancesTags[j])) {
+                            count += 1;
+                        }
+                    }
+                }
+                //Premier tri avec les tags: Si les tags ne correspondent pas à la recette
+                //renvoie return, et on passe à la recette suivante
+                if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
+                    continue
+                }
+            }
+    
+            //Test de l'input utilisateur
+            if (inputValue.length > 2) {
+                let recipeKeywords = getRecipeArray(recipes[i]).join(' ');
+                for(let j=0; j<inputKeywords.input.length; j+=1) {
+                    if (!recipeKeywords.includes(inputKeywords.input[j])) {
+                        match = false;
+                        continue
+                    }
+                }
+            }
+            // Si elle match, on rajoute cette recette au résultat
+            if (match) {
+                result.push(recipes[i]);
+            }
+    }
+    
     const recipesGallery = document.querySelector('.recipes__gallery');
     const ingredientsTagList = document.querySelector('.ingredients__menu__list');
     const appareilsTagList = document.querySelector('.appareils__menu__list');

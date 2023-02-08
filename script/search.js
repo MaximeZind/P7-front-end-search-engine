@@ -59,7 +59,7 @@ export function getRecipeArray(recipe) {
         .concat(ustensils)
         .filter(word => !stopWords.includes(word))
         .filter(element => element);
-    return keywords
+    return keywords;
 }
 
 //Fonction qui va filtrer les recettes en fonction de l'input

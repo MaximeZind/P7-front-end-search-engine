@@ -104,8 +104,8 @@ export function search() {
             }
             //Premier tri avec les tags: Si les tags ne correspondent pas à la recette
             //renvoie return, et on passe à la recette suivante
-            if (!(count === (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
-                return
+            if ((count !== (inputKeywords.ingredientsTags.length + inputKeywords.appliancesTags.length + inputKeywords.ustensilsTags.length))) {
+                return;
             }
         }
 
@@ -115,7 +115,7 @@ export function search() {
             inputKeywords.input.forEach((keyword) => {
                 if (!recipeKeywords.includes(keyword)) {
                     match = false;
-                    return
+                    return;
                 }
             });
         }

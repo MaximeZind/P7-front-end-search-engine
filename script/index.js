@@ -77,7 +77,7 @@ function getEventListeners(){
 }
 
 function init(){
-    displayData(recipes);
+    search();
     getEventListeners();
 }
 

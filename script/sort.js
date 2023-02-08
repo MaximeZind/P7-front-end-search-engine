@@ -18,7 +18,7 @@ export function searchInit() {
         }
     });
 
-    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().replace(/[^a-zA-Z\s]+/g, "").trim();
+    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
     let inputValueArray = [];
     if (inputValue.length > 2) {
         inputValueArray = inputValue.split(/\s+/);
@@ -35,10 +35,11 @@ export function searchInit() {
 
 export function search() {
 
-    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().replace(/[^a-zA-Z\s]+/g, "").trim();
+    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
     const filtersSection = document.querySelector('.filters');
     let inputKeywords = searchInit();
     let result = [];
+    // Pour chaque recette
     recipes.forEach((recipe) => {
         let match = true;
         let count = 0;

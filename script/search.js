@@ -1,5 +1,4 @@
 import { recipes } from '../data/recipes.js';
-import { getRecipeArray } from './globals.js';
 import { displayData } from './pages/index.js';
 
 export function getInputKeywords() {

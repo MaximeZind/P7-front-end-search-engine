@@ -8,14 +8,19 @@
     <script src="https://kit.fontawesome.com/5b9da4c6e6.js" crossorigin="anonymous"></script>
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/images/lespetitsplats_favicon.ico">
     <title>Les petits plats</title>
 </head>
-
+<!-- BODY -->
 <body>
+    <!-- Header -->
     <header class="header">
         <img src="assets/images/lespetitsplats_logo.png" alt="Logo les petits plats">
     </header>
+    <!-- /Header -->
+    <!-- Main -->
     <main>
+        <!-- Formulaire de recherche -->
         <div class="recipe__searchform__wrapper">
             <form method="post" id="recipe__searchform">
                 <input type="text" name="search" placeholder="Rechercher une recette">
@@ -25,7 +30,10 @@
             </form>
         </div>
         <section class="filters__section">
+            <!-- Tags -->
             <div class="filters"></div>
+            <!-- /Tags -->
+            <!-- Menus déroulant -->
             <div class="filters__menus">
                 <div class="menu__wrapper">
                     <div class="ingredients__menu dropdown">
@@ -66,13 +74,17 @@
                         <div class="ustensils__menu__list  dropdown__list"></div>
                     </div>
                 </div>
+                <!-- /Menus déroulant -->
             </div>
         </section>
         <div class="no__results">
             <p>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
         </div>
+        <!-- Gallerie -->
         <section class="recipes__gallery"></section>
+        <!-- /Gallerie -->
     </main>
+    <!-- /Main -->
     <script src="script/pages/index.js" type="module"></script>
 </body>
 </html>

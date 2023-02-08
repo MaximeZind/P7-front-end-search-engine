@@ -1,6 +1,6 @@
-import { recipes } from '../data/recipes.js';
+import { recipes } from '/data/recipes.js';
 import { getRecipeArray } from '../script/globals.js';
-import { displayData } from '../script/index.js';
+import { displayData } from '../script/pages/index.js';
 
 export function searchInit() {
     //Création de l'array de tags

@@ -1,9 +1,13 @@
-import {recipes} from '../data/recipes.js';
-import { search } from '../script/sort.js';
-import { dropdownInteraction } from '../script/dropdown.js';
-import { tagFilter } from '../script/dropdown.js';
-import { selectTag } from '../script/dropdown.js';
-import { closeTag } from '../script/dropdown.js';
+import { search } from '../sort.js';
+import { dropdownInteraction } from '../dropdown.js';
+import { tagFilter } from '../dropdown.js';
+import { selectTag } from '../dropdown.js';
+import { closeTag } from '../dropdown.js';
+import { recipesFactory } from '../factory/recipesfactory.js';
+import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
+
+
+
 
 
  export function displayData(recipes){
@@ -35,7 +39,7 @@ import { closeTag } from '../script/dropdown.js';
                 }
             });
 
-        const recipeModel = recipePageFactory(recipe);
+        const recipeModel = recipesFactory(recipe);
         const recipeCardsDOM = recipeModel.getRecipeCardsDOM();
 
         recipesGallery.append(recipeCardsDOM);

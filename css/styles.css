@@ -10,8 +10,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 7vw;
-    padding-right: 7vw;
+    padding: 7vw;
+    padding-top: 10px;
 }
 
 

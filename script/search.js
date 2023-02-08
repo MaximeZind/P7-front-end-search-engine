@@ -29,23 +29,20 @@ export function getInputKeywords() {
         'ustensilsTags': ustensilsTags,
         'appliancesTags': appliancesTags,
         'input': inputValueArray
-    }
-    return keywords
+    };
+    return keywords;
 }
 
 export function search() {
-    const errorMsg = document.querySelector('.no__results');
-    errorMsg.classList.add('hidden');
-    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
-    const filtersSection = document.querySelector('.filters');
-    let inputKeywords = getInputKeywords();
+    const inputKeywords = getInputKeywords();
+    const allFilters = inputKeywords.ingredientsTags.concat(inputKeywords.ustensilsTags).concat(inputKeywords.appliancesTags);
     let result = [];
     // Pour chaque recette
     recipes.forEach((recipe) => {
         let match = true;
         let count = 0;
         //Si il y a des tags
-        if (filtersSection.children.length > 0) {
+        if (allFilters.length > 0) {
             //Tags ingrédients
             if (inputKeywords.ingredientsTags.length > 0) {
                 inputKeywords.ingredientsTags.forEach((item) => {
@@ -82,7 +79,7 @@ export function search() {
         }
 
         //Test de l'input utilisateur
-        if (inputValue.length > 2) {
+        if (inputKeywords) {
             let recipeKeywords = getRecipeArray(recipe).join(' ');
             inputKeywords.input.forEach((keyword) => {
                 if (!recipeKeywords.includes(keyword)) {
@@ -96,16 +93,5 @@ export function search() {
             result.push(recipe);
         }
     });
-    const recipesGallery = document.querySelector('.recipes__gallery');
-    const ingredientsTagList = document.querySelector('.ingredients__menu__list');
-    const appareilsTagList = document.querySelector('.appareils__menu__list');
-    const ustensilsTagList = document.querySelector('.ustensils__menu__list');
-    recipesGallery.innerHTML = '';
-    ingredientsTagList.innerHTML = '';
-    appareilsTagList.innerHTML = '';
-    ustensilsTagList.innerHTML = '';
     displayData(result);
-    if (result.length === 0){
-        errorMsg.classList.remove('hidden');
-    }
 }

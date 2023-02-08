@@ -7,11 +7,22 @@ import { recipesFactory } from '../factory/recipesfactory.js';
 import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
 
 export function displayData(recipes) {
+    //gestion du message d'erreur
+    const errorMsg = document.querySelector('.no__results');
+    errorMsg.classList.add('hidden');
+    if (recipes.length === 0){
+        errorMsg.classList.remove('hidden');
+    }
     const ingredientsList = document.querySelector(".ingredients__menu__list");
     const appareilsList = document.querySelector(".appareils__menu__list");
     const ustensilsList = document.querySelector(".ustensils__menu__list");
     const recipesGallery = document.querySelector(".recipes__gallery");
 
+    //Initialisation de la page (suppression des cartes de recettes, et listes des menus déroulants)
+    recipesGallery.innerHTML = '';
+    ingredientsList.innerHTML = '';
+    appareilsList.innerHTML = '';
+    ustensilsList.innerHTML = '';
     let allIngredients = [];
     let allAppliances = [];
     let allUstensils = [];

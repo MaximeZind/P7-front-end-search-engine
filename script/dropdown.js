@@ -96,15 +96,20 @@ export function tagFilter(event) {
     const inputValue = event.target.value.trim().toLowerCase().normalize("NFD");
     list = Array.from(list);
     list.forEach((element) => {
-        element.classList.remove('hidden');
-        const term = element.textContent.toLowerCase().normalize('NFD');
-        tags.forEach((tag) => {
-            if (term === tag.innerText.toLowerCase().normalize('NFD')) {
-                element.classList.add('hidden');
-            }
-        });
+        let term = element.textContent;
+        term = term.toLowerCase().normalize("NFD"); //enlève tous les accents
         if (!term.includes(inputValue)) {
             element.classList.add('hidden');
+        } if (term.includes(inputValue)) {
+            let tagUnclicked = true;
+            tags.forEach((tag) => {
+                if (term === tag.innerText.toLowerCase().normalize('NFD')) {
+                    tagUnclicked = false;
+                }
+            });
+            if (tagUnclicked === true) {
+                element.classList.remove('hidden');
+            }
         }
     });
 }

@@ -7,6 +7,8 @@ import { closeTag } from '../dropdown.js';
 import { recipesFactory } from '../factory/recipesfactory.js';
 import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
 
+//Fonction qui traite les données de recette qui lui sont fournies, et
+//les renvoie vers la factory
 export function displayData(recipes) {
     //Message d'erreur s'il n'y a pas de recettes
     const errorMsg = document.querySelector('.no__results');
@@ -67,6 +69,8 @@ export function displayData(recipes) {
     ustensilsList.append(ustensilsDropdownDOM);
 }
 
+//Fonction qui renvoie l'object keywords, avec une array pour chaque
+//type de tag, ainsi qu'une array de mots-clés (input utilisateur)
 function getInputKeywords() {
     //Création de l'array de tags
     const filtersSection = document.querySelector('.filters');
@@ -98,6 +102,7 @@ function getInputKeywords() {
     return keywords;
 }
 
+//Fonction qui met en place les eventListeners
 function getEventListeners() {
 
     //Dom Elements
@@ -127,6 +132,7 @@ function getEventListeners() {
     });
 }
 
+//Fonction qui appelle la fonction de recherche
 export function searchInit(){
     const inputKeywords = getInputKeywords();
     const result = search(inputKeywords, recipes);

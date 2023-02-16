@@ -52,21 +52,14 @@ export function search(inputKeywords, recipes) {
             let ingredients = [];
             recipe.ingredients.forEach((ingredient) => {
                 ingredients = ingredients.concat(ingredient.ingredient.toLowerCase().split(' '));
-
             });
-
             let ustensils = [];
             recipe.ustensils.forEach((ustensil) => {
                 ustensils = ustensils.concat(ustensil.toLowerCase().split(' '));
-
             });
-
             let instructions = recipe.description.toLowerCase().split(' ');
-
             let appliance = recipe.appliance.toLowerCase();
-
             let title = recipe.name.toLowerCase().split(' ');
-
             let keywords = title.concat(ingredients)
                 .concat(instructions)
                 .concat(appliance)

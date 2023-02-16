@@ -117,7 +117,7 @@ function getEventListeners() {
         list.addEventListener('click', selectTag);
     });
     filtersSection.addEventListener('click', closeTag);
-    recipeSearchFormInput.addEventListener('keyup', search);
+    recipeSearchFormInput.addEventListener('keyup', searchInit);
     forms.forEach((form) => {
         form.addEventListener('submit', event => {
             event.preventDefault();

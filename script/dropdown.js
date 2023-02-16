@@ -89,7 +89,6 @@ export function dropdownInteraction(event) {
 }
 
 // Fonctions pour filtrer les Ingrédients / Appareils / Ustensiles
-
 export function tagFilter(event) {
     const tags = document.querySelectorAll('.tag');
     let list = event.target.parentNode.parentNode.nextElementSibling.firstChild.children;

@@ -1,3 +1,4 @@
+import { recipes } from '../../data/recipes.js';
 import { search } from '../search.js';
 import { dropdownInteraction } from '../dropdown.js';
 import { tagFilter } from '../dropdown.js';
@@ -6,6 +7,8 @@ import { closeTag } from '../dropdown.js';
 import { recipesFactory } from '../factory/recipesfactory.js';
 import { dropdownMenusFactory } from '../factory/dropdownfactory.js';
 
+//Fonction qui traite les données de recettes qui lui sont fournies, et
+//les renvoie vers la factory en question
 export function displayData(recipes) {
     //gestion du message d'erreur
     const errorMsg = document.querySelector('.no__results');
@@ -28,7 +31,6 @@ export function displayData(recipes) {
     let allUstensils = [];
 
     recipes.forEach((recipe) => {
-
         recipe.ingredients.forEach((item) => {
             let itemLowerCase = item.ingredient.toLowerCase();
             if (!allIngredients.includes(itemLowerCase)) {
@@ -48,14 +50,10 @@ export function displayData(recipes) {
             }
         });
         allUstensils = allUstensils.sort((a, b) => a.localeCompare(b, 'fr'));
-
         const recipeModel = recipesFactory(recipe);
         const recipeCardsDOM = recipeModel.getRecipeCardsDOM();
-
         recipesGallery.append(recipeCardsDOM);
-
     });
-
     const dropdownsModel = dropdownMenusFactory(allIngredients, allAppliances, allUstensils);
     const ingredientsDrowndownDOM = dropdownsModel.getIngredientsDrowndownDOM();
     const appliancesDrowndownDOM = dropdownsModel.getAppliancesDrowndownDOM();
@@ -66,6 +64,38 @@ export function displayData(recipes) {
     ustensilsList.append(ustensilsDropdownDOM);
 }
 
+//Fonction qui renvoie un object keywords, contenant une array pour chaque
+//type de tag, ainsi qu'une array de mots clés (input utilisateur)
+function getInputKeywords() {
+    //Création de l'array de tags
+    const filtersSection = document.querySelector('.filters');
+    let ingredientsTags = [];
+    let appliancesTags = [];
+    let ustensilsTags = [];
+    Array.from(filtersSection.children).forEach((tag) => {
+        if (tag.className.includes('ingredient')) {
+            ingredientsTags.push(tag.innerText.toLowerCase());
+        } else if (tag.className.includes('appareil')) {
+            appliancesTags.push(tag.innerText.toLowerCase());
+        } else if (tag.className.includes('ustensil')) {
+            ustensilsTags.push(tag.innerText.toLowerCase());
+        }
+    });
+    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
+    let inputValueArray = [];
+    if (inputValue.length > 2) {
+        inputValueArray = inputValue.split(/\s+/);
+    }
+    let keywords = {
+        'ingredientsTags': ingredientsTags,
+        'ustensilsTags': ustensilsTags,
+        'appliancesTags': appliancesTags,
+        'input': inputValueArray
+    };
+    return keywords;
+}
+
+//Fonction qui met en place nos EventListeners
 function getEventListeners() {
 
     //Dom Elements
@@ -95,8 +125,15 @@ function getEventListeners() {
     });
 }
 
+//Fonction qui appelle la fonction de recherche
+export function searchInit(){
+    const inputKeywords = getInputKeywords();
+    const result = search(inputKeywords, recipes);
+    displayData(result);
+}
+
 function init() {
-    search();
+    searchInit();
     getEventListeners();
 }
 

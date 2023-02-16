@@ -101,7 +101,6 @@ export function tagFilter(event) {
         } if (term.includes(inputValue)) {
             let tagUnclicked = true;
             tags.forEach((tag) => {
-                console.log(term);
                 if (term === tag.innerText.toLowerCase().normalize('NFD')) {
                     tagUnclicked = false;
                 }

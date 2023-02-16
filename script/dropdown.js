@@ -89,17 +89,21 @@ export function dropdownInteraction(event) {
 // Fonctions pour filtrer les Ingrédients / Appareils / Ustensiles
 
 export function tagFilter(event) {
+    const tags = document.querySelectorAll('.tag');
     let list = event.target.parentNode.parentNode.nextElementSibling.firstChild.children;
-    const inputValue = event.target.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const inputValue = event.target.value.trim().toLowerCase().normalize("NFD");
     list = Array.from(list);
     list.forEach((element) => {
-        let term = element.textContent;
-        term = term.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); //enlève tous les accents
+        element.classList.remove('hidden');
+        const term = element.textContent.toLowerCase().normalize('NFD');
+        tags.forEach((tag) => {
+            if (term === tag.innerText.toLowerCase().normalize('NFD')){
+                element.classList.add('hidden');
+            }
+        });
         if (!term.includes(inputValue)) {
             element.classList.add('hidden');
-        } if (term.includes(inputValue)) {
-            element.classList.remove('hidden');
-        }
+        } 
     });
 }
 

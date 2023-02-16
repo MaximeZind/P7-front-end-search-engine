@@ -1,4 +1,4 @@
-import { search } from './search.js';
+import { searchInit } from './pages/index.js';
 
 //Fonction qui gère l'ouverture des menus dropdown
 function openDropdown(event) {
@@ -131,7 +131,7 @@ export function selectTag(event) {
         filtersSection.append(span);
         span.append(i);
     }
-    search();
+    searchInit();
 }
 
 
@@ -160,5 +160,5 @@ export function closeTag(event) {
         }
         event.target.parentNode.remove();
     }
-    search();
+    searchInit();
 }

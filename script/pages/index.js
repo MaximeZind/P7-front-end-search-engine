@@ -1,3 +1,4 @@
+import { recipes } from '../../data/recipes.js';
 import { search } from '../search.js';
 import { dropdownInteraction } from '../dropdown.js';
 import { tagFilter } from '../dropdown.js';
@@ -66,6 +67,37 @@ export function displayData(recipes) {
     ustensilsList.append(ustensilsDropdownDOM);
 }
 
+function getInputKeywords() {
+    //Création de l'array de tags
+    const filtersSection = document.querySelector('.filters');
+    let ingredientsTags = [];
+    let appliancesTags = [];
+    let ustensilsTags = [];
+    Array.from(filtersSection.children).forEach((tag) => {
+        if (tag.className.includes('ingredient')) {
+            ingredientsTags.push(tag.innerText.toLowerCase());
+        } else if (tag.className.includes('appareil')) {
+            appliancesTags.push(tag.innerText.toLowerCase());
+        } else if (tag.className.includes('ustensil')) {
+            ustensilsTags.push(tag.innerText.toLowerCase());
+        }
+    });
+
+    const inputValue = document.querySelector('#recipe__searchform > input').value.toLowerCase().trim();
+    let inputValueArray = [];
+    if (inputValue.length > 2) {
+        inputValueArray = inputValue.split(/\s+/);
+    }
+
+    let keywords = {
+        'ingredientsTags': ingredientsTags,
+        'ustensilsTags': ustensilsTags,
+        'appliancesTags': appliancesTags,
+        'input': inputValueArray
+    };
+    return keywords;
+}
+
 function getEventListeners() {
 
     //Dom Elements
@@ -87,7 +119,7 @@ function getEventListeners() {
         list.addEventListener('click', selectTag);
     });
     filtersSection.addEventListener('click', closeTag);
-    recipeSearchFormInput.addEventListener('keyup', search);
+    recipeSearchFormInput.addEventListener('keyup', searchInit);
     forms.forEach((form) => {
         form.addEventListener('submit', event => {
             event.preventDefault();
@@ -95,8 +127,14 @@ function getEventListeners() {
     });
 }
 
+export function searchInit(){
+    const inputKeywords = getInputKeywords();
+    const result = search(inputKeywords, recipes);
+    displayData(result);
+}
+
 function init() {
-    search();
+    searchInit();
     getEventListeners();
 }
 

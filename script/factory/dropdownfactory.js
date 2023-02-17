@@ -30,12 +30,12 @@ export function dropdownMenusFactory(ingredients, appliances, ustensils) {
             let itemFirstCaseHigher = item.charAt(0).toUpperCase() + item.slice(1);
             const li = document.createElement('li');
             li.textContent = `${itemFirstCaseHigher}`;
-            // tags.forEach((tag) => {
-            //     console.log(tag);
-            //     if (tag.innerText === li.textContent){
-            //         li.setAttribute('class','hidden');
-            //     }
-            // });
+            tags.forEach((tag) => {
+                console.log(tag);
+                if (tag.innerText === li.textContent){
+                    li.setAttribute('class','hidden');
+                }
+            });
             ul.append(li);
         });
 

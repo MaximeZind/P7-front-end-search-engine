@@ -2,13 +2,13 @@
 // pour créer les éléments de notre page
 
 export function recipesFactory(data){
-    const {id, name, servings, ingredients, time, description, appliance, ustensils} = data;
+  const {id, name, servings, ingredients, time, description, appliance, ustensils} = data;
 
-    //Fonction qui va créer nos cartes de recettes
-    function getRecipeCardsDOM() {
-        const article = document.createElement('article');
+  //Fonction qui va créer nos cartes de recettes
+  function getRecipeCardsDOM() {
+    const article = document.createElement('article');
 
-        article.innerHTML = `
+    article.innerHTML = `
         <img src="https://via.placeholder.com/380x178?text=Lespetitsplats.com">
         <div class="card__content">
             <header>
@@ -31,11 +31,11 @@ export function recipesFactory(data){
                 </div>
             </div>
         </div>
-        `
+        `;
 
-        return article
+    return article;
 
-    }
+  }
 
-    return {id, name, servings, time, description, appliance, ustensils, getRecipeCardsDOM}
+  return {id, name, servings, time, description, appliance, ustensils, getRecipeCardsDOM};
 }
